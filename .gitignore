@@ -1,0 +1,4 @@
+ignora
+**/.gradle/
+**/bin/
+**/build/
