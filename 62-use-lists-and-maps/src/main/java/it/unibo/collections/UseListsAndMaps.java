@@ -36,7 +36,7 @@ public final class UseListsAndMaps {
             final long millis = TimeUnit.NANOSECONDS.toMillis(time);
 
            IO.println(
-            "Inserting" + " " + ELEMS + " " + "ints in  " + list + "took "
+            "Inserting" + " " + ELEMS + " " + "ints took "
             + time
             + "ns ("
             + millis
@@ -55,7 +55,7 @@ public final class UseListsAndMaps {
         final long millis = TimeUnit.NANOSECONDS.toMillis(time);
 
         IO.println(
-            "Reading" + " " + READS + " " + "times in the middle of " + list + "took "
+            "Reading" + " " + READS + " " + "times in the middle took "
             + time
             + "ns ("
             + millis
