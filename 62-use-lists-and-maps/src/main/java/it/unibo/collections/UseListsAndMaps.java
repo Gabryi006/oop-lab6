@@ -27,6 +27,42 @@ public final class UseListsAndMaps {
     private static final Long OCEANIA=38_304_000L;
     private static final Long EUROPE=742_452_000L;
 
+    private static void measureInsertion(final List<Integer> list) {
+            long time = System.nanoTime();
+            for (int i = 0; i < ELEMS; i++) {
+                 list.addFirst(i); 
+            }
+            time = System.nanoTime() - time;
+            final long millis = TimeUnit.NANOSECONDS.toMillis(time);
+
+           IO.println(
+            "Inserting" + " " + ELEMS + " " + "ints in  " + list + "took "
+            + time
+            + "ns ("
+            + millis
+            + "ms)"
+            );
+        }
+
+    private static void measureReading(final List<Integer> list) {
+
+        final int middleIndex = list.size() / 2 - 1;
+        long time = System.nanoTime();
+        for (int i = 0; i < READS; i++) {
+            list.get(middleIndex);
+        }
+        time= System.nanoTime() - time;
+        final long millis = TimeUnit.NANOSECONDS.toMillis(time);
+
+        IO.println(
+            "Reading" + " " + READS + " " + "times in the middle of " + list + "took "
+            + time
+            + "ns ("
+            + millis
+            + "ms)"
+        );
+
+    }
     /**
      * Program entry point.
      */
@@ -75,41 +111,8 @@ public final class UseListsAndMaps {
          * TestPerformance.java.
          */
 
-        long time = System.nanoTime();
-        for(int i=0; i<ELEMS; i++) {
-
-            list.addFirst(i);
-        }
-
-        time= System.nanoTime() -time;
-        var millis = TimeUnit.NANOSECONDS.toMillis(time);
-
-        IO.println(
-            "Inserting" + " " + ELEMS + " " + "ints in a ArrayList took "
-            + time
-            + "ns ("
-            + millis
-            + "ms)"
-        );
-
-        time= System.nanoTime();
-
-        for(int i=0; i<ELEMS; i++) {
-
-            newList.add(i);
-        }
-
-        time= System.nanoTime() -time;
-        millis = TimeUnit.NANOSECONDS.toMillis(time);
-
-        IO.println(
-            "Inserting" + " " + ELEMS + " " + "ints in a LinkedList took "
-            + time
-            + "ns ("
-            + millis
-            + "ms)"
-        );
-
+        measureInsertion(list);
+        measureInsertion(newList);
 
         /*
          * 6) Measure the performance of reading 1000 times an element whose
@@ -117,43 +120,10 @@ public final class UseListsAndMaps {
          * LinkedList, using the collections of point 5. In order to measure
          * times, use as example TestPerformance.java.
          */
-
-
-        time= System.nanoTime();
-
-        for(int i=0; i<READS; i++) {
-            list.get((list.size()/2)-1);
-        }
-
-        time=System.nanoTime()-time;
-        millis = TimeUnit.NANOSECONDS.toMillis(time);
-
-        IO.println(
-            "Reading" + " " + READS + " " + "times in the middle of the ArrayList took "
-            + time
-            + "ns ("
-            + millis
-            + "ms)"
-        );
-
-        time= System.nanoTime();
-
-        for(int i=0; i<READS; i++) {
-            newList.get((newList.size()/2)-1);
-        }
-
-        time=System.nanoTime()-time;
-        millis = TimeUnit.NANOSECONDS.toMillis(time);
-
-        IO.println(
-            "Reading" + " " + READS + " " + "times in the middle of the LinkedList took "
-            + time
-            + "ns ("
-            + millis
-            + "ms)"
-        );
-
         
+        measureReading(list);
+        measureReading(newList);
+
         /*
          * 7) Build a new Map that associates to each continent's name its
          * population:
