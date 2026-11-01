@@ -112,7 +112,7 @@ public final class SocialNetworkUserImpl<U extends User> extends UserImpl implem
 
             return new HashSet<>(followedUsers.get(groupName));
         }
-        return new HashSet<>(null);
+        return Collections.emptyList();
     }
 
     @Override
